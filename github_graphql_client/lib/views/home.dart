@@ -3,8 +3,8 @@ import 'package:github_graphql_client/github_gql/github_queries.data.gql.dart';
 import 'package:github_graphql_client/github_gql/github_queries.req.gql.dart';
 import 'package:github_graphql_client/secrets.dart';
 import 'package:github_graphql_client/views/github_login_widget.dart';
+import 'package:github_graphql_client/views/github_summary_list.dart';
 import 'package:gql_exec/gql_exec.dart';
-import 'package:gql_http_link/gql_http_link.dart';
 import 'package:gql_link/gql_link.dart';
 import 'package:window_to_front/window_to_front.dart';
 
@@ -12,28 +12,13 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GithubLoginWidget(
-      builder: (context, httpClient) {
+      builder: (context, client) {
         WindowToFront.activate();
-        final link = HttpLink(
-          'https://api.github.com/graphql',
-          httpClient: httpClient,
-        );
-        return FutureBuilder<GViewerDetailData_viewer>(
-          future: viewerDetail(link),
-          builder: (context, snapshot) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text('Github'),
-              ),
-              body: Center(
-                child: Text(
-                  snapshot.hasData
-                      ? 'Hello ${snapshot.data!.login}!'
-                      : 'Retrieving viewer login details...',
-                ),
-              ),
-            );
-          },
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('GitHub GraphQL client'),
+          ),
+          body: GitHubSummary(client: client),
         );
       },
       githubClientId: githubClientId,
