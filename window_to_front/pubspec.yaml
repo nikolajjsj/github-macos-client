@@ -1,0 +1,25 @@
+name: window_to_front
+description: A new flutter plugin project.
+version: 0.0.1
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: ">=1.20.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      linux:
+        pluginClass: WindowToFrontPlugin
+      macos:
+        pluginClass: WindowToFrontPlugin
+      windows:
+        pluginClass: WindowToFrontPlugin
